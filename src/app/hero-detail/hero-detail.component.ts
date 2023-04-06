@@ -1,43 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
-  styleUrls: ['./hero-detail.component.scss']
+  styleUrls: [ './hero-detail.component.css' ]
 })
 export class HeroDetailComponent implements OnInit {
-  @Input() hero: Hero;
+  hero: Hero | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
     private location: Location
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getHero();
   }
 
-  // Could not get this to work.
-  // heroDoMap() {
-  //   this.hero
-  //   //.do(val => console.log('before map to string', val))
-  //   .tap(val => console.log('before map to string', val))
-  //   .map(title => title.$name.toUpperCase())
-  //   // .do(val => console.log('after map to string', val))
-  //   .tap(val => console.log('after map to string', val))
-  //   .subscribe()
-  // }
-
   getHero(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
     this.heroService.getHero(id)
       .subscribe(hero => this.hero = hero);
-      // this.heroDoMap();
   }
 
   goBack(): void {
@@ -45,7 +34,16 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save(): void {
-    this.heroService.updateHero(this.hero)
-      .subscribe(() => this.goBack());
+    if (this.hero) {
+      this.heroService.updateHero(this.hero)
+        .subscribe(() => this.goBack());
+    }
   }
 }
+
+
+/*
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+*/

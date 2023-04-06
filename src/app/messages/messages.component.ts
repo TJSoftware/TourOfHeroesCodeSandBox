@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MessageService } from '../message.service';
-import { LoggerService } from '../logger.service';
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.scss']
+  styleUrls: ['./messages.component.css']
 })
-export class MessagesComponent implements OnInit {
+export class MessagesComponent {
 
-  constructor(public messageService: MessageService,
-              public loggerService: LoggerService) { }
-
-  ngOnInit() {
-  }
+  constructor(public messageService: MessageService) {}
 
 }
+
+
+/*
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+*/

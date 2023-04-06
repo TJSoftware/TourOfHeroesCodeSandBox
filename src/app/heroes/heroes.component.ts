@@ -1,38 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Hero } from '../hero';
-// import { HEROES } from '../mock-heroes';
 import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.scss']
+  styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  // hero = 'Windstorm';
-  // hero: Hero = {
-  //   id: 1,
-  //   name: 'Windstorm'
-  // }
-
-  // selectedHero: Hero;
-  // heroes = HEROES;
-  heroes: Hero[];
+  heroes: Hero[] = [];
 
   constructor(private heroService: HeroService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getHeroes();
   }
 
-  // onSelect(hero: Hero): void {
-  //   this.selectedHero = hero;
-  // }
-
   getHeroes(): void {
-    // this.heroes = this.heroService.getHeroes();
     this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes);
+    .subscribe(heroes => this.heroes = heroes);
   }
 
   add(name: string): void {
@@ -46,6 +33,14 @@ export class HeroesComponent implements OnInit {
 
   delete(hero: Hero): void {
     this.heroes = this.heroes.filter(h => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
+    this.heroService.deleteHero(hero.id).subscribe();
   }
+
 }
+
+
+/*
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+*/

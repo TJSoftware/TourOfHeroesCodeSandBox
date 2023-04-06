@@ -12,10 +12,10 @@ import { HeroService } from '../hero.service';
 @Component({
   selector: 'app-hero-search',
   templateUrl: './hero-search.component.html',
-  styleUrls: [ './hero-search.component.scss' ]
+  styleUrls: [ './hero-search.component.css' ]
 })
 export class HeroSearchComponent implements OnInit {
-  heroes$: Observable<Hero[]>;
+  heroes$!: Observable<Hero[]>;
   private searchTerms = new Subject<string>();
 
   constructor(private heroService: HeroService) {}
@@ -38,3 +38,10 @@ export class HeroSearchComponent implements OnInit {
     );
   }
 }
+
+
+/*
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+*/
